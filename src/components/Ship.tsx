@@ -1,8 +1,13 @@
+import { useGLTF } from '@react-three/drei'
+
 export default function Ship() {
+  const gltf = useGLTF('/models/shuttle.gltf')
+
   return (
-    <mesh position={[0, 2, 0]}>
-      <boxGeometry attach="geometry" />
-      <meshStandardMaterial attach={'material'} color={'hotpink'} />
-    </mesh>
+    <primitive
+      object={gltf.scene}
+      rotation={[-Math.PI / 2, 4.7, 0]}
+      position-y={3}
+    />
   )
 }
