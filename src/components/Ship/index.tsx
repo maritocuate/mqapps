@@ -17,6 +17,9 @@ export default function Ship() {
   const orbitShipRef = useRef<THREE.Mesh>(null)
   const shipRef = useRef<THREE.Mesh>(null)
 
+  const acceleration = 0.02
+  const deceleration = 0.01
+
   const movement: Movement = useMemo(
     () => ({
       forward: false,
@@ -27,9 +30,9 @@ export default function Ship() {
     []
   )
 
-  const speed = 0.5
+  let speed = 0
+  const maxSpeed = 0.4
   const rotationSpeed = 0.05
-  const reverseSpeed = 0.05
 
   useFrame(() => {
     if (!shipRef.current || !orbitShipRef.current) return
@@ -38,17 +41,19 @@ export default function Ship() {
     if (movement.left) orbitShipRef.current.rotation.y += rotationSpeed
     if (movement.right) orbitShipRef.current.rotation.y -= rotationSpeed
 
-    // Position movement
     if (movement.forward) {
-      const orbitRotationY = orbitShipRef.current.rotation.y
-      orbitShipRef.current.position.z -= speed * Math.cos(orbitRotationY)
-      orbitShipRef.current.position.x -= speed * Math.sin(orbitRotationY)
+      speed = Math.min(speed + acceleration, maxSpeed)
+    } else if (movement.backward) {
+      speed = Math.max(speed / 1.5 - acceleration, -maxSpeed)
+    } else {
+      const decelerationRate = speed > 0 ? acceleration : -acceleration
+      speed = Math.abs(speed) < deceleration ? 0 : speed - decelerationRate
     }
-    if (movement.backward) {
-      const orbitRotationY = orbitShipRef.current.rotation.y
-      orbitShipRef.current.position.z += reverseSpeed * Math.cos(orbitRotationY)
-      orbitShipRef.current.position.x += reverseSpeed * Math.sin(orbitRotationY)
-    }
+
+    // Position movement
+    const orbitRotationY = orbitShipRef.current.rotation.y
+    orbitShipRef.current.position.z -= speed * Math.cos(orbitRotationY)
+    orbitShipRef.current.position.x -= speed * Math.sin(orbitRotationY)
   })
 
   const handleMove = (key: string, value: boolean) => {
