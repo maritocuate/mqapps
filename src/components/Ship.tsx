@@ -8,7 +8,7 @@ export default function Ship() {
       object={gltf.scene}
       rotation={[-1.55, 4.7, 0]}
       position={[0, 0, -3]}
-      scale={[0.7, 0.7, 0.7]}
+      scale={[0.6, 0.6, 0.6]}
     />
   )
 }

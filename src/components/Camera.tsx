@@ -4,11 +4,11 @@ export default function Camera() {
   return (
     <PerspectiveCamera
       makeDefault
-      fov={100}
+      fov={45}
       near={0.1}
-      far={1000}
-      position={[0, 10, 0]}
-      zoom={0.9}
+      far={100}
+      position={[0, 10, 8]}
+      zoom={0.5}
     />
   )
 }
