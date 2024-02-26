@@ -1,17 +1,20 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Stars } from '@react-three/drei'
+import { Grid, OrbitControls, Stars } from '@react-three/drei'
 import Ship from './Ship'
-import Plane from './Plane'
+import Camera from './Camera'
+import Lights from './Lights'
 
 export default function MainCanvas() {
   return (
     <Canvas>
+      <Camera />
       <OrbitControls />
+
       <Stars />
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 15, 10]} angle={0.3} />
+      <Lights />
       <Ship />
-      <Plane />
+
+      <Grid args={[100, 100]} />
     </Canvas>
   )
 }

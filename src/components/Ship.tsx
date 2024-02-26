@@ -6,8 +6,9 @@ export default function Ship() {
   return (
     <primitive
       object={gltf.scene}
-      rotation={[-Math.PI / 2, 4.7, 0]}
-      position-y={3}
+      rotation={[-1.55, 4.7, 0]}
+      position={[0, 0, -3]}
+      scale={[0.7, 0.7, 0.7]}
     />
   )
 }
