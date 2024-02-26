@@ -27,7 +27,7 @@ export default function Ship() {
     []
   )
 
-  const speed = 0.2
+  const speed = 0.5
   const rotationSpeed = 0.05
   const reverseSpeed = 0.05
 

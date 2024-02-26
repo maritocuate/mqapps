@@ -10,7 +10,7 @@ export default function MainCanvas() {
       <Camera />
       <OrbitControls />
 
-      <Stars />
+      {/* <Stars /> */}
       <Lights />
       <Ship />
 
