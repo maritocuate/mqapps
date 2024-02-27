@@ -34,8 +34,13 @@ export default function Ship() {
   const maxSpeed = 0.4
   const rotationSpeed = 0.05
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
     if (!shipRef.current || !orbitShipRef.current) return
+
+    // Camera movement
+    camera.position.setX(orbitShipRef.current.position.x)
+    camera.position.setZ(orbitShipRef.current.position.z)
+    camera.lookAt(orbitShipRef.current.position)
 
     // Rotation movement
     if (movement.left) orbitShipRef.current.rotation.y += rotationSpeed
