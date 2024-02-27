@@ -3,6 +3,8 @@ import { RepeatWrapping } from 'three'
 
 export default function Background() {
   const texture = useTexture('/images/stars.jpeg')
+
+  // Repeat and wrap the texture
   texture.repeat.set(15, 15)
   texture.wrapS = texture.wrapT = RepeatWrapping
 
