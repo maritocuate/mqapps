@@ -80,6 +80,8 @@ export default function Ship() {
         />
       </mesh>
       <ShipControls onMove={handleMove} />
+
+      {/* <Image scale={200} url="/stars.jpeg" rotation={[-Math.PI / 2, 0, 0]} /> */}
     </>
   )
 }
