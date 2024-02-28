@@ -9,8 +9,12 @@ export default function Background() {
   texture.wrapS = texture.wrapT = RepeatWrapping
 
   return (
-    <Plane args={[4000, 3000]} rotation={[-Math.PI / 2, 0, 0]}>
-      <meshBasicMaterial map={texture} opacity={0.5} transparent />
+    <Plane
+      args={[4000, 3000]}
+      rotation={[-Math.PI / 2, 0, 0]}
+      position={[0, -15, 0]}
+    >
+      <meshBasicMaterial map={texture} opacity={0.8} transparent />
     </Plane>
   )
 }

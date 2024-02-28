@@ -1,8 +1,9 @@
 import { Canvas } from '@react-three/fiber'
-import { Grid, OrbitControls } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import Ship from './Ship'
 import Lights from './Lights'
 import Camera from './Camera'
+import Comets from './Comets'
 import Background from './Background'
 
 export default function MainCanvas() {
@@ -16,9 +17,8 @@ export default function MainCanvas() {
         <Ship />
       </group>
 
+      <Comets />
       <Background />
-
-      <Grid args={[100, 100]} position={[0, -1, 0]} />
     </Canvas>
   )
 }
