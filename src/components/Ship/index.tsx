@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { Cone, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import ShipControls from './ShipControls'
 
@@ -16,6 +16,7 @@ export default function Ship() {
 
   const orbitShipRef = useRef<THREE.Mesh>(null)
   const shipRef = useRef<THREE.Mesh>(null)
+  const fireRef = useRef<THREE.Mesh>(null)
 
   const acceleration = 0.02
   const deceleration = 0.01
@@ -35,7 +36,7 @@ export default function Ship() {
   const rotationSpeed = 0.05
 
   useFrame(({ camera }) => {
-    if (!shipRef.current || !orbitShipRef.current) return
+    if (!shipRef.current || !orbitShipRef.current || !fireRef.current) return
 
     // Camera movement
     camera.position.setX(orbitShipRef.current.position.x)
@@ -48,9 +49,11 @@ export default function Ship() {
 
     if (movement.forward) {
       speed = Math.min(speed + acceleration, maxSpeed)
+      fireRef.current.visible = true
     } else if (movement.backward) {
       speed = Math.max(speed / 1.5 - acceleration, -maxSpeed)
     } else {
+      fireRef.current.visible = false
       const decelerationRate = speed > 0 ? acceleration : -acceleration
       speed = Math.abs(speed) < deceleration ? 0 : speed - decelerationRate
     }
@@ -77,11 +80,16 @@ export default function Ship() {
           rotation={[-1.55, 4.7, 0]}
           position={[0, 0, 2]}
           scale={[0.6, 0.6, 0.6]}
-        />
+        >
+          <mesh ref={fireRef} position={[0.5, -3.8, 0]}>
+            <Cone args={[1.3, 4, 7]} rotation={[Math.PI / 1, 0, 0]}>
+              <meshBasicMaterial transparent opacity={0.3} color="yellow" />
+            </Cone>
+          </mesh>
+        </primitive>
       </mesh>
-      <ShipControls onMove={handleMove} />
 
-      {/* <Image scale={200} url="/stars.jpeg" rotation={[-Math.PI / 2, 0, 0]} /> */}
+      <ShipControls onMove={handleMove} />
     </>
   )
 }
