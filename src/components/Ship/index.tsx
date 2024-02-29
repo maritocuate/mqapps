@@ -83,7 +83,7 @@ export default function Ship() {
         >
           <mesh ref={fireRef} position={[0.5, -3.8, 0]}>
             <Cone args={[1.3, 4, 7]} rotation={[Math.PI / 1, 0, 0]}>
-              <meshBasicMaterial transparent opacity={0.3} color="yellow" />
+              <meshBasicMaterial transparent opacity={0.1} color="yellow" />
             </Cone>
           </mesh>
         </primitive>
