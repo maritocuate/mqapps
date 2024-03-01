@@ -6,6 +6,7 @@ import Camera from './Camera'
 import Comets from './Comets'
 import Background from './Background'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import Platform from './Platform'
 
 export default function MainCanvas() {
   return (
@@ -18,6 +19,7 @@ export default function MainCanvas() {
         <Ship />
       </group>
 
+      <Platform />
       <Comets />
 
       <Background />
