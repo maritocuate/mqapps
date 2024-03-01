@@ -1,6 +1,4 @@
-import { Circle, Cylinder, SpotLight, Tube, useGLTF } from '@react-three/drei'
-
-const rot = 3
+import { Cylinder, SpotLight, useGLTF } from '@react-three/drei'
 
 export default function Platform() {
   const { scene } = useGLTF('/models/round_platform/scene.gltf')
