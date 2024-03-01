@@ -5,6 +5,7 @@ import Lights from './Lights'
 import Camera from './Camera'
 import Comets from './Comets'
 import Background from './Background'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
 export default function MainCanvas() {
   return (
@@ -18,7 +19,11 @@ export default function MainCanvas() {
       </group>
 
       <Comets />
+
       <Background />
+      <EffectComposer>
+        <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
+      </EffectComposer>
     </Canvas>
   )
 }
