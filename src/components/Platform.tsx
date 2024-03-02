@@ -1,6 +1,5 @@
-import { Cylinder, SpotLight, useGLTF, useHelper } from '@react-three/drei'
-import { useControls } from 'leva'
-import { useEffect, useRef } from 'react'
+import { useHelper } from '@react-three/drei'
+import { useRef } from 'react'
 import * as THREE from 'three'
 import { DirectionalLightHelper } from 'three'
 import Model from './Model'
@@ -20,7 +19,7 @@ export default function Platform({ posX, PoxY }: PlatformProps) {
       <directionalLight
         ref={lightRef}
         visible
-        position={[0, 11, 0]}
+        position={[0, 20, 0]}
         target-position={[posX, 0, PoxY]}
         castShadow
       />

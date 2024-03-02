@@ -12,10 +12,13 @@ export default function Model({ modelPath }: ModelProps) {
 
   useEffect(() => {
     model.scene.traverse(child => {
-      if (child.isMesh) {
-        child.castShadow = true
-        child.receiveShadow = true
-        child.material.side = THREE.FrontSide
+      if ((child as THREE.Mesh).isMesh) {
+        const meshChild = child as THREE.Mesh
+        meshChild.castShadow = true
+        meshChild.receiveShadow = true
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        meshChild.material.side = THREE.FrontSide
       }
     })
   }, [model])
