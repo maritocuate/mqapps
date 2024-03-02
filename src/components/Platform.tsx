@@ -1,36 +1,47 @@
-import { Cylinder, SpotLight, useGLTF } from '@react-three/drei'
+import { Cylinder, SpotLight, useGLTF, useHelper } from '@react-three/drei'
 import { useControls } from 'leva'
+import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
+import { DirectionalLightHelper } from 'three'
+import Model from './Model'
 
-export default function Platform() {
-  const { scene } = useGLTF('/models/round_platform/scene.gltf')
+type PlatformProps = {
+  posX: number
+  PoxY: number
+}
 
-  const { position } = useControls('Spotlight', {
-    position: {
-      value: [-40, 10, -70],
-      step: 1,
-    },
-  })
+export default function Platform({ posX, PoxY }: PlatformProps) {
+  const lightRef = useRef<THREE.DirectionalLight>(null)
+  useHelper(lightRef, DirectionalLightHelper, 1, 'red')
 
   return (
-    <>
-      <mesh>
-        <primitive
-          object={scene}
-          scale={8}
-          position={[-40, -10, -70]}
-        ></primitive>
-        {/* <Cylinder scale={[19, 39, 19]} position={[-40, 10, -70]}>
-          <meshBasicMaterial transparent opacity={0.3} color="blue" />
-        </Cylinder> */}
+    <group position={[posX, 0, PoxY]}>
+      {/* Light */}
+      <directionalLight
+        ref={lightRef}
+        visible
+        position={[0, 11, 0]}
+        target-position={[posX, 0, PoxY]}
+        castShadow
+      />
 
-        <SpotLight
-          position={position}
-          distance={15}
-          angle={0.15}
-          attenuation={5}
-          anglePower={5}
-        />
+      {/* Ball */}
+      <mesh
+        name="meshPhongMaterial"
+        position={[1, 3, 0]}
+        material={
+          new THREE.MeshPhongMaterial({ color: 'lime', flatShading: true })
+        }
+        castShadow
+        receiveShadow
+      >
+        <icosahedronGeometry args={[1, 1]} />
       </mesh>
-    </>
+
+      {/* Floor */}
+      <mesh position={[0, -5.3, 0]} receiveShadow>
+        <Model modelPath="/models/round_platform/scene.gltf" />
+      </mesh>
+    </group>
   )
 }
