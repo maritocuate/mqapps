@@ -5,9 +5,19 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 type ModelProps = {
   modelPath: string
+  scale?: number
+  position?: [number, number, number]
+  rotation?: [number, number, number]
+  children?: React.ReactNode
 }
 
-export default function Model({ modelPath }: ModelProps) {
+export default function Model({
+  modelPath,
+  scale,
+  position,
+  rotation,
+  children,
+}: ModelProps) {
   const model = useLoader(GLTFLoader, modelPath)
 
   useEffect(() => {
@@ -23,5 +33,15 @@ export default function Model({ modelPath }: ModelProps) {
     })
   }, [model])
 
-  return model ? <primitive object={model.scene} scale={8} /> : null
+  return (
+    <primitive
+      object={model.scene}
+      scale={scale}
+      position={position}
+      rotation={rotation}
+      receiveShadow
+    >
+      {children}
+    </primitive>
+  )
 }
