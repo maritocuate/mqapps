@@ -3,6 +3,7 @@ import { Cone, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import ShipControls from './ShipControls'
 import { GLTF } from 'three-stdlib'
+import * as THREE from 'three'
 
 type Movement = {
   forward: boolean
@@ -38,7 +39,7 @@ export default function Ship() {
       material.roughness = 0
     })
     scene.traverse(child => {
-      if (child.isMesh) {
+      if (child instanceof THREE.Mesh) {
         child.castShadow = true
         child.receiveShadow = true
       }
