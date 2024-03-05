@@ -24,11 +24,7 @@ export default function Platform({ posX, PoxY }: PlatformProps) {
 
       {/* Floor */}
       <mesh position={[0, -5.3, 0]}>
-        <Model
-          modelPath="/models/round_platform/scene.gltf"
-          scale={8}
-          receiveShadow
-        />
+        <Model modelPath="/models/round_platform/scene.gltf" scale={8} />
       </mesh>
     </group>
   )

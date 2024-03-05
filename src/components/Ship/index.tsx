@@ -37,7 +37,13 @@ export default function Ship() {
     Object.values(materials).forEach(material => {
       material.roughness = 0
     })
-  }, [materials])
+    scene.traverse(child => {
+      if (child.isMesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+      }
+    })
+  }, [materials, scene])
 
   const movement: Movement = useMemo(
     () => ({
