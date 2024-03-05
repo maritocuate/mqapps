@@ -1,7 +1,4 @@
-import { useHelper } from '@react-three/drei'
-import { useRef } from 'react'
-import * as THREE from 'three'
-import { DirectionalLightHelper } from 'three'
+import { SpotLight } from '@react-three/drei'
 import Model from './Model'
 
 type PlatformProps = {
@@ -10,36 +7,28 @@ type PlatformProps = {
 }
 
 export default function Platform({ posX, PoxY }: PlatformProps) {
-  const lightRef = useRef<THREE.DirectionalLight>(null)
-  useHelper(lightRef, DirectionalLightHelper, 1, 'red')
-
   return (
     <group position={[posX, 0, PoxY]}>
       {/* Light */}
-      <directionalLight
-        ref={lightRef}
-        visible
+      <SpotLight
         position={[0, 20, 0]}
+        intensity={40}
+        decay={0.5}
+        distance={30}
+        angle={0.9}
+        color={'white'}
+        penumbra={0.5}
         target-position={[posX, 0, PoxY]}
         castShadow
       />
 
-      {/* Ball */}
-      <mesh
-        name="meshPhongMaterial"
-        position={[1, 3, 0]}
-        material={
-          new THREE.MeshPhongMaterial({ color: 'lime', flatShading: true })
-        }
-        castShadow
-        receiveShadow
-      >
-        <icosahedronGeometry args={[1, 1]} />
-      </mesh>
-
       {/* Floor */}
-      <mesh position={[0, -5.3, 0]} receiveShadow>
-        <Model modelPath="/models/round_platform/scene.gltf" />
+      <mesh position={[0, -5.3, 0]}>
+        <Model
+          modelPath="/models/round_platform/scene.gltf"
+          scale={8}
+          receiveShadow
+        />
       </mesh>
     </group>
   )
