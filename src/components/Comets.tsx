@@ -16,7 +16,7 @@ const generateRandomRotation = (): [number, number, number] => {
 }
 
 export default function Comets() {
-  const numberOfStars = 1000
+  const numberOfStars = 500
   const texture = useTexture('/images/comet.jpg')
 
   const stars = useMemo(() => {
